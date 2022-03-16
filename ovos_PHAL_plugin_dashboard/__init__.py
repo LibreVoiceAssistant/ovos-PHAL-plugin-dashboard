@@ -11,7 +11,7 @@ from ovos_plugin_manager.phal import PHALPlugin
 
 class OVOSDashboardPlugin(PHALPlugin):
     def __init__(self, bus=None, config=None):
-        super().__init__(bus=bus, name="ovos-PHAL-dashboard-plugin", config=config)
+        super().__init__(bus=bus, name="ovos-PHAL-plugin-dashboard", config=config)
         self.bus = bus
         self.bus.on("ovos.PHAL.dashboard.enable",
                     self.handle_device_developer_enable_dash)
