@@ -28,8 +28,7 @@ class OVOSDashboardPlugin(PHALPlugin):
         LOG.info("Dashboard Plugin Initalized")
 
     def handle_device_dashboard_status_check(self):
-        build_status_check_call = "systemctl --user is-active --quiet ovos-dashboard@'{0}'.service".format(
-            self.dash_secret)
+        build_status_check_call = f"systemctl --user is-active --quiet ovos-dashboard@'{self.dash_secret}'.service"
         status = os.system(build_status_check_call)
 
         if status == 0:
@@ -39,7 +38,7 @@ class OVOSDashboardPlugin(PHALPlugin):
 
         if self.dash_running:
             self.bus.emit(Message("ovos.PHAL.dashboard.status.response", {
-                          "running": True, "url": "https://{0}:5000".format(get_ip()), "user": "OVOS", "password": self.dash_secret}))
+                          "running": True, "url": f"https://{get_ip()}:5000", "user": "OVOS", "password": self.dash_secret}))
         else:
             self.bus.emit(Message("ovos.PHAL.dashboard.status.response", {
                           "running": False, "url": None, "user": None, "password": None}))
@@ -51,8 +50,7 @@ class OVOSDashboardPlugin(PHALPlugin):
             self.dash_secret)
         call_dash = subprocess.Popen([build_call], shell=True)
         time.sleep(3)
-        build_status_check_call = "systemctl --user is-active --quiet ovos-dashboard@'{0}'.service".format(
-            self.dash_secret)
+        build_status_check_call = f"systemctl --user is-active --quiet ovos-dashboard@'{self.dash_secret}'.service"
         status = os.system(build_status_check_call)
 
         if status == 0:
@@ -62,15 +60,13 @@ class OVOSDashboardPlugin(PHALPlugin):
 
         if self.dash_running:
             self.bus.emit(Message("ovos.PHAL.dashboard.status.response", {
-                          "running": True, "url": "https://{0}:5000".format(get_ip()), "user": "OVOS", "password": self.dash_secret}))
+                          "running": True, "url": f"https://{get_ip()}:5000", "user": "OVOS", "password": self.dash_secret}))
 
     def handle_device_developer_disable_dash(self, message):
-        build_call = "systemctl --user stop ovos-dashboard@'{0}'.service".format(
-            self.dash_secret)
+        build_call = f"systemctl --user stop ovos-dashboard@'{self.dash_secret}'.service"
         subprocess.Popen([build_call], shell=True)
         time.sleep(3)
-        build_status_check_call = "systemctl --user is-active --quiet ovos-dashboard@'{0}'.service".format(
-            self.dash_secret)
+        build_status_check_call = f"systemctl --user is-active --quiet ovos-dashboard@'{self.dash_secret}'.service"
         status = os.system(build_status_check_call)
 
         if status == 0:
