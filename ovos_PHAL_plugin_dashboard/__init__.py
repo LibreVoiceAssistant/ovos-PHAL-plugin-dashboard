@@ -27,7 +27,7 @@ class OVOSDashboardPlugin(PHALPlugin):
 
         LOG.info("Dashboard Plugin Initalized")
 
-    def handle_device_dashboard_status_check(self):
+    def handle_device_dashboard_status_check(self, _):
         build_status_check_call = "systemctl --user is-active --quiet ovos-dashboard@'{0}'.service".format(
             self.dash_secret)
         status = os.system(build_status_check_call)
@@ -39,10 +39,10 @@ class OVOSDashboardPlugin(PHALPlugin):
 
         if self.dash_running:
             self.bus.emit(Message("ovos.PHAL.dashboard.status.response", {
-                          "running": True, "url": "https://{0}:5000".format(get_ip()), "user": "OVOS", "password": self.dash_secret}))
+                          "status": True, "url": "https://{0}:5000".format(get_ip()), "user": "OVOS", "password": self.dash_secret}))
         else:
             self.bus.emit(Message("ovos.PHAL.dashboard.status.response", {
-                          "running": False, "url": None, "user": None, "password": None}))
+                          "status": False, "url": None, "user": None, "password": None}))
 
     def handle_device_developer_enable_dash(self, message):
         os.environ["SIMPLELOGIN_USERNAME"] = "OVOS"
@@ -62,7 +62,7 @@ class OVOSDashboardPlugin(PHALPlugin):
 
         if self.dash_running:
             self.bus.emit(Message("ovos.PHAL.dashboard.status.response", {
-                          "running": True, "url": "https://{0}:5000".format(get_ip()), "user": "OVOS", "password": self.dash_secret}))
+                          "status": True, "url": "https://{0}:5000".format(get_ip()), "user": "OVOS", "password": self.dash_secret}))
 
     def handle_device_developer_disable_dash(self, message):
         build_call = "systemctl --user stop ovos-dashboard@'{0}'.service".format(
@@ -80,4 +80,4 @@ class OVOSDashboardPlugin(PHALPlugin):
 
         if not self.dash_running:
             self.bus.emit(Message("ovos.PHAL.dashboard.status.response", {
-                          "running": False, "url": None, "user": None, "password": None}))
+                          "status": False, "url": None, "user": None, "password": None}))
