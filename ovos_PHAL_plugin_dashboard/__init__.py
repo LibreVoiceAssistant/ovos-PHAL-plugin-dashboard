@@ -62,7 +62,7 @@ class OVOSDashboardPlugin(PHALPlugin):
 
         if self.dash_running:
             self.bus.emit(Message("ovos.PHAL.dashboard.status.response", {
-                          "running": True, "url": "https://{0}:5000".format(get_ip()), "user": "OVOS", "password": self.dash_secret}))
+                          "status": True, "url": "https://{0}:5000".format(get_ip()), "user": "OVOS", "password": self.dash_secret}))
 
     def handle_device_developer_disable_dash(self, message):
         build_call = "systemctl --user stop ovos-dashboard@'{0}'.service".format(
@@ -80,4 +80,4 @@ class OVOSDashboardPlugin(PHALPlugin):
 
         if not self.dash_running:
             self.bus.emit(Message("ovos.PHAL.dashboard.status.response", {
-                          "running": False, "url": None, "user": None, "password": None}))
+                          "status": False, "url": None, "user": None, "password": None}))
