@@ -27,7 +27,7 @@ class OVOSDashboardPlugin(PHALPlugin):
 
         LOG.info("Dashboard Plugin Initalized")
 
-    def handle_device_dashboard_status_check(self):
+    def handle_device_dashboard_status_check(self, _):
         build_status_check_call = "systemctl --user is-active --quiet ovos-dashboard@'{0}'.service".format(
             self.dash_secret)
         status = os.system(build_status_check_call)
