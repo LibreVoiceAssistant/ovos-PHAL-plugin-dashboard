@@ -24,7 +24,7 @@ class OVOSDashboardPlugin(PHALPlugin):
         alphabet = string.ascii_letters + string.digits
         self.dash_secret = ''.join(secrets.choice(alphabet) for i in range(5))
 
-        LOG.info("Dashboard Plugin Initalized")
+        LOG.info("Dashboard Plugin Initialized")
 
     def handle_device_dashboard_status_check(self, _):
         if self._check_dash_running():
@@ -37,9 +37,9 @@ class OVOSDashboardPlugin(PHALPlugin):
     def _check_dash_running(self) -> bool:
         build_status_check_call = "systemctl --user is-active --quiet ovos-dashboard@'{0}'.service".format(
             self.dash_secret)
-        status = os.system(build_status_check_call)
-        LOG.debug(f"Dash status check got return: {status}")
-        return status == 0
+        ret_code = subprocess.run(build_status_check_call, shell=True).returncode
+        LOG.debug(f"Dash status check got return: {ret_code}")
+        return ret_code == 0
 
     def handle_device_developer_enable_dash(self, message):
         os.environ["SIMPLELOGIN_USERNAME"] = "OVOS"
@@ -47,7 +47,7 @@ class OVOSDashboardPlugin(PHALPlugin):
         build_call = "systemctl --user start ovos-dashboard@'{0}'.service".format(
             self.dash_secret)
         LOG.debug(f'Starting dash with: `{build_call}`')
-        call_dash = subprocess.Popen([build_call], shell=True)
+        call_dash = subprocess.run(build_call, shell=True)
         LOG.debug(f'Dash returned: {call_dash.returncode}')
         time.sleep(3)
         self.handle_device_dashboard_status_check(message)
