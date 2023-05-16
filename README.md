@@ -1,8 +1,3 @@
-# DEPRECATED - OVOS PHAL Dashboard Plugin
-
-This repository is no longer maintained by OpenVoiceOS
-
-___________________________________________________________
 The Dashboard PHAL plugin provides a simple interface to start, stop and provide status for the onboard flask based web dashboard for the device a user can connect to using his local network.
 
 # Requirements
