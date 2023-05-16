@@ -2,7 +2,11 @@
 
 ## [V0.0.2a2](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-dashboard/tree/V0.0.2a2) (2022-12-06)
 
-[Full Changelog](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-dashboard/compare/98bbd7aa8e1b1de36ee15fb50158d0ae469b4448...V0.0.2a2)
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-dashboard/compare/V0.0.2a3...V0.0.2a2)
+
+## [V0.0.2a3](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-dashboard/tree/V0.0.2a3) (2022-12-06)
+
+[Full Changelog](https://github.com/OpenVoiceOS/ovos-PHAL-plugin-dashboard/compare/98bbd7aa8e1b1de36ee15fb50158d0ae469b4448...V0.0.2a3)
 
 **Merged pull requests:**
 
